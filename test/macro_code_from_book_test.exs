@@ -22,10 +22,19 @@ defmodule MacroCodeFromBookTest do
       "block entered"
   end
 
+  test "ch1 fail to inject into the ast, since missing 'unquote'" do
+    # https://elixirforum.com/t/how-to-test-a-compile-error/15626/2
+    assert_raise CompileError, "nofile:1: undefined function number/0", fn() ->
+      ast = quote do
+        number() * 10
+      end
+      Code.eval_quoted ast
+    end
+  end
+
   test "ch1 inject values into the ast with unquote" do
     ## this is not a macro file but an iex example in the book page13
     number = 5
-    |> IO.inspect
 
     ast = quote do
       number * 10
@@ -49,3 +58,4 @@ defmodule MacroCodeFromBookTest do
   end
 
 end
+
