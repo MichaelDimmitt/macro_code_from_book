@@ -6,6 +6,8 @@ defmodule Mix.Tasks.All do
     # calling our Hello.say() function from earlier
     ch1_math()
     ch1_cf()
+
+    code_eval_example()
   end
 
   require Math
@@ -24,6 +26,26 @@ defmodule Mix.Tasks.All do
   def ch1_cf() do
     ControlFlow.unless 2 == 5, do: "block entered"
     |> IO.inspect()
+  end
+
+  def code_eval_example() do
+    ## this is not a macro file but an iex example in the book page13
+    number = 5
+    |> IO.inspect
+
+    ast = quote do
+      number * 10
+    end
+    asty = quote do
+      unquote(number) * 10
+    end
+    [
+      ast: ast,
+      asty: asty,
+      eval_asty: Code.eval_quoted asty
+    ]
+    |> IO.inspect
+
   end
 
 end
