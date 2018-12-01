@@ -26,6 +26,9 @@ defmodule Mix.Tasks.All do
   def ch1_cf() do
     ControlFlow.unless 2 == 5, do: "block entered"
     |> IO.inspect()
+
+    ControlFlow.unless !(2 == 5), do: "block entered"
+    |> IO.inspect() # this returns nil
   end
 
   def code_eval_example() do
@@ -45,7 +48,6 @@ defmodule Mix.Tasks.All do
       eval_asty: Code.eval_quoted asty
     ]
     |> IO.inspect
-
   end
 
 end
