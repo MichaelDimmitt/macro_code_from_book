@@ -1,9 +1,19 @@
 defmodule MathTest do
   use ExUnit.Case
   doctest Math
-
   require Math
+  #  defmacro say({:+, _, [lhs, rhs]}) do
+  #     quote do
+  #       lhs = unquote(lhs)
+  #       rhs = unquote(rhs)
+  #       result = lhs + rhs
+  #       [ result: result,
+  #         str: "#{lhs} plus #{rhs} is #{result}"]
+  #     end
+  #   end
+  
   test "ch1 macro, look at pieces of a quoted expression" do
+
     assert Math.say(5 + 2) ==
       [result: 7, str: "5 plus 2 is 7"]
 
